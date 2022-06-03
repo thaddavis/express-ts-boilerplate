@@ -7,6 +7,8 @@ export interface ErrorResponseBodyDto {
 
 export interface ResponseBodyDto {
   message: any;
+  language: string;
+  languages: readonly string[];
 }
 
 const router = express.Router();
@@ -16,10 +18,13 @@ router.get(
   async function (req: Request, res: Response, next: NextFunction) {
     try {
       const responseBody: ResponseBodyDto = {
-        message: "OK",
+        // message: "OK",
+        message: req.t("public:xxx_the_artist"),
+        language: req.i18n.language,
+        languages: req.i18n.languages,
       };
 
-      throw new Error("Yay!");
+      // throw new Error("Yay!");
 
       res.status(200).json(responseBody);
     } catch (e) {

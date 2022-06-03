@@ -1,8 +1,8 @@
 # STEP
 
 -$ npm init -y
--$ npm i express body-parser express express-winston cors
--$ npm i -D @types/express @types/node @types/jest @types/cors nodemon ts-node ts-jest jest
+-$ npm i express body-parser express express-winston cors i18next i18next-fs-backend i18next-http-middleware
+-$ npm i -D @types/express @types/node @types/jest @types/cors nodemon ts-node ts-jest jest @types/i18next @types/i18next-fs-backend
 
 # STEP
 
@@ -124,9 +124,14 @@ export default json({
 })
 ```
 
-# push to git
+# STEP push to git
 
 -$ touch .gitignore
 -$ echo /node_modules >> .gitignore
 -$ echo /dist >> .gitignore
 -$ echo /logs >> .gitignore
+
+# STEP i18next
+
+https://github.com/i18next/i18next-http-middleware
+https://github.com/i18next/i18next-http-middleware/blob/master/example/basic/index.js
