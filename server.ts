@@ -18,7 +18,7 @@ i18next
   // .use(languageDetector)
   .use(i18nextMiddleware.LanguageDetector)
   .init({
-    ns: ["general", "public"],
+    ns: ["general", "fruits"],
     // debug: true,
     // detection: {
     //   order: ['customDetector']
@@ -32,21 +32,33 @@ i18next
     },
     fallbackLng: "en",
     // nonExplicitSupportedLngs: true,
-    supportedLngs: ["en", "es"],
-    load: "languageOnly",
-    saveMissing: true,
+    supportedLngs: ["en", "es", "de"],
+    // load: "languageOnly",
   });
 
 const app = express();
 
-app.use("/locales", express.static("locales"));
-app.use(cors());
-
-app.use(i18nextMiddleware.handle(i18next));
+app.set("views", "./views");
+app.set("view engine", "pug");
 
 app.use(requestLogger);
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+app.use("/locales", express.static("locales"));
+app.use(i18nextMiddleware.handle(i18next));
 app.use(jsonBodyParser);
 app.use("/api", apiRouter);
+
+app.get("/", (req, res) => {
+  console.log("req.i18n.language", req.i18n.language);
+  console.log("req.i18n.languages", req.i18n.languages);
+
+  res.render("index");
+});
+
 app.use(errorMiddleware);
 
 export default app;
